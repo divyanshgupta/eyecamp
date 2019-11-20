@@ -7,12 +7,12 @@ const mongoose = require('mongoose');
 
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-
+const bodyParser = require('body-parser');
 /*Es 2015 modules* */
 // import express from 'express'
 const app = express();
 
-
+app.use(bodyParser.json())
 app.use(cookieSession(
     {
         maxAge:30*24*60*60*1000,
@@ -25,6 +25,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/authRoutes')(app)
+require('./routes/bilingRoutes')(app)
 
 mongoose.connect(keys.mongoURI)
 

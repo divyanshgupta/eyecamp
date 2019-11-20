@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import StripeCheckoutComponent from './Payments';
+
 class Header extends Component
 {
 
@@ -16,15 +18,22 @@ class Header extends Component
                 </li>)
 
             default:
-                return (<li>
-                    <a href="/api/logout">Logout</a>
-                </li>)
+                return [
+                    <li key="1">
+                        <StripeCheckoutComponent></StripeCheckoutComponent>
+                    </li>,
+                    <li key="3" style={{margin:'0 10px'}}>Credits:{this.props.auth.credits}</li>,
+                    <li key="2">
+                        <a href="/api/logout">Logout</a>
+                    </li>
+
+                ]
 
         }
     }
     render()
     {
-     
+
         return (
             <nav>
                 <div className="nav-wrapper">
@@ -50,3 +59,4 @@ function mapStateToProps({ auth })
     return { auth }
 }
 export default connect(mapStateToProps)(Header);
+
