@@ -41,25 +41,17 @@ class Mailer extends helper.Mail {
   }
 
   async send() {
+    console.log("Making post call to send grid",this.toJSON())
     const request = this.sgApi.emptyRequest({
       method: 'POST',
       path: '/v3/mail/send',
       body: this.toJSON()
     });
-
+    console.log("Response from Sengdrid",)
     const response = await this.sgApi.API(request);
+    console.log("Response from Sengdrid",response)
     return response;
   }
 }
 
 module.exports = Mailer;
-
-// sgMail.setApiKey(keys.sendGridKey);
-//                 const msg = {
-//                 to: 'divyansh.2392@gmail.com',
-//                 from: 'test@example.com',
-//                 subject: 'Sending with Twilio SendGrid is Fun',
-//                 text: 'and easy to do anywhere, even with Node.js',
-//                 html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-//                 };
-//                 sgMail.send(msg);
